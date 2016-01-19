@@ -45,7 +45,7 @@ function matchCase(match, replacement) {
   
   if(isUpperCase(match)) { return replacement.toUpperCase(); }
   if(isLowerCase(match)) { return replacement.toLowerCase(); }
-  if(isTitleCase(match)) { return replacement.charAt(0).toUpperCase() + replacement.slice(1); }
+  if(isTitleCase(match)) { return replacement.charAt(0).toUpperCase() + replacement.slice(1).toLowerCase(); }
   throw new TypeError(`${match} is not a valid input`);
 }
 
