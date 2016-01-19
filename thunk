@@ -26,11 +26,11 @@ if(2 == process.argv.length) {
 }
 
 if(!verb || !verb.length) { 
-  process.stderr.write('You must specify a verb as the first argument\n'); 
+  process.stderr.write('Must specify a verb as the first argument\n'); 
   process.exit(1); 
 }
 if(!noun || !noun.length) { 
-  process.stderr.write('You must specify a noun as the second argument\n'); 
+  process.stderr.write('Must specify a noun as the second argument\n'); 
   process.exit(1); 
 }
 
@@ -49,7 +49,7 @@ const fs = require('fs');
 const template = fs.readFileSync('./template.js', 'utf-8');
 
 let out = template
-  .replace(/\$noun/gi, (match) => matchCase(match, noun))
-  .replace(/\$verb/gi, (match) => matchCase(match, verb));
+  .replace(/\$noun/gi, match => matchCase(match, noun))
+  .replace(/\$verb/gi, match => matchCase(match, verb));
 
 process.stdout.write(out);
