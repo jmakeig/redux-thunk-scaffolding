@@ -4,7 +4,7 @@
 const verb = process.argv[2]; //'fetch';
 const noun = process.argv[3]; //'bone';
 
-if(2 == process.argv.length) {
+if(2 === process.argv.length) {
   const self = './' + process.argv[1].split('/').reverse()[0];
   process.stdout.write(
 `
