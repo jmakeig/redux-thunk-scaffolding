@@ -1,0 +1,41 @@
+#! /usr/bin/env node
+'use strict'
+
+const fs = require('fs');
+
+const template = fs.readFileSync('./template.js', 'utf-8');
+
+const verb = process.argv[2]; //'fetch';
+const noun = process.argv[3]; //'bone';
+
+if(2 == process.argv.length) {
+  process.stderr.write(`\nUsage:\n\t./${process.argv[1].split('/').reverse()[0]} fetch bone\n`);
+  process.stderr.write(`\nwhere “fetch” is a verb and “bone” is a noun.\n\n`);
+  process.exit(1);
+}
+
+if(!verb || !verb.length) { 
+  process.stderr.write('You must specify a verb as the first argument\n'); 
+  process.exit(1); 
+}
+if(!noun || !noun.length) { 
+  process.stderr.write('You must specify a noun as the second argument\n'); 
+  process.exit(1); 
+}
+
+function matchCase(match, replacement) {
+  function isUpperCase(str) { return Array.from(str).every(chr => chr === chr.toUpperCase()); }
+  function isLowerCase(str) { return Array.from(str).every(chr => chr === chr.toLowerCase()); }
+  function isTitleCase(str) { return (/[A-Z][a-z]+/).test(str); }
+  
+  if(isUpperCase(match)) { return replacement.toUpperCase(); }
+  if(isLowerCase(match)) { return replacement.toLowerCase(); }
+  if(isTitleCase(match)) { return replacement.charAt(0).toUpperCase() + replacement.slice(1); }
+  throw new TypeError(`${match} is not a valid input`);
+}
+
+let out = template
+  .replace(/\$noun/gi, (match) => matchCase(match, noun))
+  .replace(/\$verb/gi, (match) => matchCase(match, verb));
+
+process.stdout.write(out);
