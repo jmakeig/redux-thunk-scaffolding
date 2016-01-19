@@ -55,10 +55,10 @@ export function $verb$Noun(data) {
 /**
  * Perform the actual asynchronous work. There shouldn't be anything
  * action-specific in here, just business logic.
- * @param  {Object} data FIXME: Make this specific
+ * @param  {?} $noun
  * @return {Promise}
  */
-function do$Verb$Noun(data /* FIXME: Make this specific */) {
+function do$Verb$Noun($noun) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/$noun');
@@ -75,10 +75,9 @@ function do$Verb$Noun(data /* FIXME: Make this specific */) {
     xhr.ontimeout =
 		xhr.onabort =
 		xhr.error = function(evt) {
-      // TODO: Get error messsage
       reject(new Error('Network Error'));
     };
-    xhr.send(data /* FIXME: Make this specific */);
+    xhr.send($noun);
   });
 }
 
@@ -89,9 +88,10 @@ function do$Verb$Noun(data /* FIXME: Make this specific */) {
  * @param  {number} progress = 0.0 An optional progress indicator from 0 to 1.0
  * @return {Object} The intent action
  */
-function intend$Verb$Noun(progress = 0.0) {
+function intend$Verb$Noun($noun, progress = 0.0) {
   return {
     type: $NOUN_$VERB_INTENT,
+		$noun: $noun,
     progress: progress
   }
 }
