@@ -9,9 +9,24 @@ const verb = process.argv[2]; //'fetch';
 const noun = process.argv[3]; //'bone';
 
 if(2 == process.argv.length) {
-  process.stderr.write(`\nUsage:\n\t./${process.argv[1].split('/').reverse()[0]} fetch bone\n`);
-  process.stderr.write(`\nwhere “fetch” is a verb and “bone” is a noun.\n\n`);
-  process.exit(1);
+  const self = './' + process.argv[1].split('/').reverse()[0];
+  process.stdout.write(
+`
+  Usage:
+  
+    ${self} verb noun
+
+  For example, “fetch” and “bone” will result in a fetchBone(bone) 
+  action creator and a BONE_FETCH_RECEIPT constant, among others.
+  Typically you’d pipe stdout to your clipboard and paste into 
+  where your actions are stored.
+
+    ${self} fetch bone | pbcopy # OS X
+    ${self} fetch bone >> my-actions.js
+    
+`
+  );
+  process.exit(0);
 }
 
 if(!verb || !verb.length) { 

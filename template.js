@@ -1,13 +1,3 @@
-/*
-  A template for asynchronous action creator lifcycle.
-  Use the `generate-actions.sh` script to create an instance.
-
-  cat template.js | ./generate-actions.sh > my-actions.js
-
- */
-
-'use strict'
-
 /* $Verb $noun *****************************************************/
 
 /*
@@ -74,8 +64,8 @@ function do$Verb$Noun($noun) {
       }
     };
     xhr.ontimeout =
-		xhr.onabort =
-		xhr.error = function(evt) {
+    xhr.onabort =
+    xhr.error = function(evt) {
       reject(new Error('Network Error'));
     };
     xhr.send($noun);
@@ -92,7 +82,7 @@ function do$Verb$Noun($noun) {
 function intend$Verb$Noun($noun, progress = 0.0) {
   return {
     type: $NOUN_$VERB_INTENT,
-		$noun: $noun,
+    $noun: $noun,
     progress: progress
   }
 }
