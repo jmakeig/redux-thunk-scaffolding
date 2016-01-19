@@ -36,20 +36,21 @@ export const $NOUN_$VERB_ERROR   = '$NOUN_$VERB_ERROR';
  * @param  {Object} data The input sent to the remote request
  * @return {function} The thunk
  */
-export function $verb$Noun(data) {
-	return function(dispatch, getState) {
-		dispatch(intend$Verb$Noun());
-		return do$Verb$Noun(data)
-			.then(function(receipt) {
-				console.log('$Verb $noun');
-				dispatch(received$Verb$Noun(receipt));
-			})
-      // .then( Dispatch subsequent actions here. )
-			.catch(function(error){
-				console.error(error);
-				dispatch(error$Verb$Noun(error));
-			});
-	}
+export function $verb$Noun($noun) {
+  return function(dispatch, getState) {
+    dispatch(intend$Verb$Noun());
+    return do$Verb$Noun($noun)
+      .then(function(receipt) {
+        console.log('$Verb $noun');
+        dispatch(received$Verb$Noun(receipt));
+      })
+      // See <http://stackoverflow.com/questions/34799677/orchestrating-multiple-actions>
+      // .then(dispatch(somethingElse(getState().otherProp))) // Dispatch subsequent actions here.
+      .catch(function(error){
+        console.error(error);
+        dispatch(error$Verb$Noun(error));
+      });
+  }
 }
 
 /**
