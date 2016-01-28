@@ -65,7 +65,7 @@ function do$Verb$Noun($noun) {
     };
     xhr.ontimeout =
     xhr.onabort =
-    xhr.error = function(evt) {
+    xhr.onerror = function(evt) {
       reject(new Error('Network Error'));
     };
     xhr.send($noun);
