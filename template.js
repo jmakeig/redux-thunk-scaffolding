@@ -51,13 +51,13 @@ export function $verb$Noun($noun) {
  */
 function do$Verb$Noun($noun) {
   return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open('POST', '/$noun');
     xhr.onload = function() {
       if(this.status < 300) {
         resolve(JSON.parse(this.responseText));
       } else if (this.status >= 300) {
-        let error = new Error(this.responseText);
+        const error = new Error(this.responseText);
         error.httpStatus = this.statusText;
         error.httpCode = this.status;
         reject(error);
